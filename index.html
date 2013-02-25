@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Vocabulary quiz</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" media="all">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-responsive.min.css" media="all">
+    <link rel="stylesheet" type="text/css" href="css/quiz.css" media="all">
+</head>
+<body>
+    <div class="container">
+        <section id="quizApp">
+
+        </section>
+    </div>
+
+    <script type="text/template" id="menu-template">
+        <div class="row">
+            <div class="span12">
+                <div class="page-header"><h1>Aktion</h1></div>
+                <div class="row">
+                    <div class="span12">
+                        <div class="well">
+                            <a class="btn btn-large btn-block" href="#quiz">Quiz</a>
+                            <a class="btn btn-large btn-block" href="#noroute">Hochladen</a>
+                            <a class="btn btn-large btn-block" href="#noroute">Herunterladen</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
+
+    <script type="text/template" id="quiz-template">
+        <!-- Current Question -->
+        <div class="row">
+            <div class="span12">
+                <div id="current" class="well">
+                    <%
+                        text = questions[question].text;
+                        index = questions[question].highlight;
+                    %>
+                    <%= text.substr(0, index) + '<span class="answerHighlight">' + text.charAt(index) + '</span>' + text.substr(index + 1, text.length) %>
+                </div>
+            </div>
+        </div>
+
+        <!-- Flash showing state of last answer -->
+        <div class="row">
+            <div class="span12">
+                <div class="alert <%= flashClass %>" id="flash"><%= message %></div>
+            </div>
+        </div>
+
+        <!-- Buttons containing answers -->
+        <div class="row">
+            <div class="span12">
+                <div id="answerButtons" class="well">
+                    <% _.each(questions, function(question, i) { %>
+                        <button class="btn btn-block answerButton" value="<%= i %>"><%= question.answer%></button>
+                    <% }); %>
+                </div>
+            </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="row">
+            <div class="span12">
+                <a class="btn btn-block btn-primary" href="#">Zurück</a>
+            </div>
+        </div>
+    </script>
+
+    <script type="text/javascript" src="js/lib/jquery-1.8.2.min.js"></script>
+    <script type="text/javascript" src="js/lib/underscore-min.js"></script>
+    <script type="text/javascript" src="js/lib/backbone-min.js"></script>
+    <script type="text/javascript" src="js/lib/backbone.localStorage-min.js"></script>
+
+    <script type="text/javascript" src="js/models/question.js"></script>
+    <script type="text/javascript" src="js/collections/questions.js"></script>
+    <script type="text/javascript" src="js/views/QuizView.js"></script>
+    <script type="text/javascript" src="js/views/MainView.js"></script>
+
+    <script type="text/javascript" src="js/router.js"></script>
+</body>
+</html>
