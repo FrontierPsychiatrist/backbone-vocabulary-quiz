@@ -9,6 +9,8 @@
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" media="all">
     <link rel="stylesheet" type="text/css" href="css/bootstrap-responsive.min.css" media="all">
     <link rel="stylesheet" type="text/css" href="css/quiz.css" media="all">
+
+    <script data-main="js/main" src="require.js"></script>
 </head>
 <body>
     <div class="container">
@@ -40,8 +42,8 @@
             <div class="span12">
                 <div id="current" class="well">
                     <%
-                        text = questions[question].text;
-                        index = questions[question].highlight;
+                        text = questions[question].get('text');
+                        index = questions[question].get('highlight');
                     %>
                     <%= text.substr(0, index) + '<span class="answerHighlight">' + text.charAt(index) + '</span>' + text.substr(index + 1, text.length) %>
                 </div>
@@ -60,7 +62,7 @@
             <div class="span12">
                 <div id="answerButtons" class="well">
                     <% _.each(questions, function(question, i) { %>
-                        <button class="btn btn-block answerButton" value="<%= i %>"><%= question.answer%></button>
+                        <button class="btn btn-block answerButton" value="<%= i %>"><%= question.get('answer')%></button>
                     <% }); %>
                 </div>
             </div>
@@ -73,17 +75,5 @@
             </div>
         </div>
     </script>
-
-    <script type="text/javascript" src="js/lib/jquery-1.8.2.min.js"></script>
-    <script type="text/javascript" src="js/lib/underscore-min.js"></script>
-    <script type="text/javascript" src="js/lib/backbone-min.js"></script>
-    <script type="text/javascript" src="js/lib/backbone.localStorage-min.js"></script>
-
-    <script type="text/javascript" src="js/models/question.js"></script>
-    <script type="text/javascript" src="js/collections/questions.js"></script>
-    <script type="text/javascript" src="js/views/QuizView.js"></script>
-    <script type="text/javascript" src="js/views/MainView.js"></script>
-
-    <script type="text/javascript" src="js/router.js"></script>
 </body>
 </html>

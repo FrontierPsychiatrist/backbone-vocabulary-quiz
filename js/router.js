@@ -1,22 +1,32 @@
-var quiz = quiz || {};
+define([
+    'backbone',
+    'jquery',
+    'views/MainView',
+    'views/QuizView'
+], function(Backbone, $, MainView, QuizView) {
 
-var router = Backbone.Router.extend({
-    routes: {
-        '': 'home',
-        'quiz': 'quiz'
-    },
+    var router = Backbone.Router.extend({
+        routes: {
+            '': 'home',
+            'quiz': 'quiz'
+        },
 
-    mainView: new quiz.MainView(),
+        mainView: new MainView(),
 
-    home: function() {
-        $('#quizApp').html( this.mainView.render().el );
-    },
+        home: function() {
+            $('#quizApp').html( this.mainView.render().el );
+        },
 
-    quiz: function() {
-        var quizView = new quiz.QuizView();
-        $('#quizApp').html( quizView.el )
+        quiz: function() {
+            var quizView = new QuizView();
+            $('#quizApp').html( quizView.el )
+        }
+    });
+
+    var initialize = function() {
+        var QuizRouter = new router();
+        Backbone.history.start();
     }
-});
 
-quiz.QuizRouter = new router();
-Backbone.history.start();
+    return { initialize: initialize };
+});

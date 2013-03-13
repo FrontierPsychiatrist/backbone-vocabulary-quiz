@@ -1,13 +1,15 @@
-var quiz = quiz || {};
+define([
+    'backbone'
+], function (Backbone) {
+    var Question =  Backbone.Model.extend({
 
-quiz.Question = Backbone.Model.extend({
+        defaults: {
+            text: '',
+            answer: '',
+            highlight: -1, /* Character to highlight */
+        }
 
-    defaults: {
-        text: '',
-        answer: '',
-        highlight: -1, /* Character to highlight */
-        answered: 0, /* times answered this questions in total */
-        correct: 0 /* times answered this question correct */
-    }
+    });
 
+    return Question;
 });
