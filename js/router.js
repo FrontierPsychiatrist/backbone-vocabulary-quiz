@@ -8,21 +8,29 @@ define([
     var router = Backbone.Router.extend({
         routes: {
             '': 'home',
-            'quiz': 'quiz'
+            'quiz/:category': 'quiz',
+            'categorySelection': 'categorySelection'
         },
 
         mainView: new MainView(),
 
         home: function() {
-            buttons = [ {link: '#quiz', text: 'Quiz'},
+            var buttons = [ {link: '#categorySelection', text: 'Quiz'},
                 {link: '#noroute', text: 'Hochladen'},
                 {link: '#noroute', text: 'Herunterladen'}];
             $('#quizApp').html( this.mainView.render(buttons).el );
         },
 
-        quiz: function() {
-            var quizView = new QuizView();
+        quiz: function(category) {
+            var quizView = new QuizView({category: category});
             $('#quizApp').html( quizView.el )
+        },
+
+        categorySelection: function() {
+            var buttons = [ {link: '#quiz/1', text: 'gelernt'},
+                {link: '#quiz/2', text: 'gekonnt'},
+                {link: '#quiz/3', text: 'neu'}];
+            $('#quizApp').html( this.mainView.render(buttons).el );
         }
     });
 

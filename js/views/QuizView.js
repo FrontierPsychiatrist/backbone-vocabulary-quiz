@@ -40,7 +40,7 @@ define([
         },
 
         newQuestion: function() {
-            this.model.questions = questions.getRandomElements(6, 3);
+            this.model.questions = questions.getRandomElements(6, this.options.category);
             this.model.question = Math.floor(Math.random() * 6) ;
             this.trigger('newquestion');
         }
