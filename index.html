@@ -19,6 +19,9 @@
         </section>
     </div>
 
+    <!-- TODO: quiz -> category selection -> quiz mit category -->
+    <!-- TODO: Editierfunktion. Mit Modal? -->
+
     <script type="text/template" id="menu-template">
         <div class="row">
             <div class="span12">
@@ -26,9 +29,9 @@
                 <div class="row">
                     <div class="span12">
                         <div class="well">
-                            <a class="btn btn-large btn-block" href="#quiz">Quiz</a>
-                            <a class="btn btn-large btn-block" href="#noroute">Hochladen</a>
-                            <a class="btn btn-large btn-block" href="#noroute">Herunterladen</a>
+                            <% _.each(buttons, function(button, i) { %>
+                            <a class="btn btn-large btn-block" href="<%= button.link %>"><%= button.text %></a>
+                            <% }); //each %>
                         </div>
                     </div>
                 </div>

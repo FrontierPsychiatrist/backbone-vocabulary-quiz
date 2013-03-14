@@ -18,12 +18,15 @@ define([
         return ret;
     }
 
-    var getRandomElements = function(number) {
+    var getRandomElements = function(number, category) {
+        var categoryQuestions = questions.filter(function (element) {
+            return element.get('category') == category;
+        });
         var out = [];
-        var numbers = createArray(questions.length);
+        var numbers = createArray(categoryQuestions.length);
         for (var i = 0; i < number; i++) {
             var index = popRandom(numbers);
-            out.push(questions[index]);
+            out.push(categoryQuestions[index]);
         }
         return out;
     }
@@ -33,24 +36,34 @@ define([
 
         for(var i = 0; i < fromStorage.length; i++) {
             var question = new Question( {
-                text: fromStorage[i].question,
-                answer: fromStorage[i].answer
+                text: fromStorage[i].text,
+                answer: fromStorage[i].answer,
+                highlight: fromStorage[i].highlight,
+                category: fromStorage[i].category,
+                globalIndex: i
             });
-            if(fromStorage[i].highlight !== undefined) {
-                question.set('highlight', fromStorage[i].highlight);
-            }
             questions.push(question);
         }
+    }
+
+    var writeToLocalStorage = function() {
+        localStorage.setItem('vocabulary', JSON.stringify(questions));
     }
 
     var at = function(index) {
         return questions[index];
     }
 
+    var setItem = function(index, element) {
+        questions[index] = element;
+    };
+
     return {
         getRandomElements: getRandomElements,
         at: at,
-        initialize: loadFromLocalStorage
+        setItem: setItem,
+        initialize: loadFromLocalStorage,
+        writeToLocalStorage: writeToLocalStorage
     };
 });
 

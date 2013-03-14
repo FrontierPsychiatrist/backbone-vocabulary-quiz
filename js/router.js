@@ -14,7 +14,10 @@ define([
         mainView: new MainView(),
 
         home: function() {
-            $('#quizApp').html( this.mainView.render().el );
+            buttons = [ {link: '#quiz', text: 'Quiz'},
+                {link: '#noroute', text: 'Hochladen'},
+                {link: '#noroute', text: 'Herunterladen'}];
+            $('#quizApp').html( this.mainView.render(buttons).el );
         },
 
         quiz: function() {

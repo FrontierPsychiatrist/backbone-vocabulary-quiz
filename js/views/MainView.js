@@ -8,9 +8,14 @@ define([
 
         template: _.template( $('#menu-template').html() ),
 
-        render: function() {
-            this.$el.html( this.template() );
+        render: function(buttons) {
+            this.model.buttons = buttons;
+            this.$el.html( this.template(this.model) );
             return this;
+        },
+
+        initialize: function() {
+            this.model = {};
         }
     });
 
