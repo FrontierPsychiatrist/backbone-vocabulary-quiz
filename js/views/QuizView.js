@@ -11,7 +11,8 @@ define([
         template: _.template( $('#quiz-template').html() ),
 
         events: {
-            'click .answerButton': 'answer'
+            'click .answerButton': 'answer',
+            'click .categoryButton': 'changeCategory'
         },
 
         render: function() {
@@ -43,6 +44,16 @@ define([
             this.model.questions = questions.getRandomElements(6, this.options.category);
             this.model.question = Math.floor(Math.random() * 6) ;
             this.trigger('newquestion');
+        },
+
+        changeCategory: function(event) {
+            var newCategory = event.target.value;
+            var currentQuestion = this.model.questions[this.model.question];
+            currentQuestion.set('category', newCategory);
+            questions.setItem(currentQuestion.get('globalIndex'), currentQuestion);
+            $('#categoryButtons .btn-primary').removeClass('btn-primary');
+            $(event.target).addClass('btn-primary');
+            questions.writeToLocalStorage();
         }
     });
 

@@ -71,6 +71,22 @@
             </div>
         </div>
 
+        <div class="row">
+            <div class="span12">
+                <div class="btn-group" id="categoryButtons">
+                    <%
+                        var buttons = [{text: 'gelernt', value: 1},
+                            {text: 'gekonnt', value: 2},
+                            {text: 'neu', value: 3}];
+                        var cat = questions[question].get('category');
+                        _.each(buttons, function(button, i) {
+                    %>
+                        <button class="btn categoryButton <%= button.value == cat ? 'btn-primary' : ''%>" value="<%= button.value %>"><%= button.text %></button>
+                    <% }); %>
+                </div>
+            </div>
+        </div>
+
         <!-- Actions -->
         <div class="row">
             <div class="span12">
